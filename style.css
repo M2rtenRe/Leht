@@ -1,0 +1,252 @@
+body {
+    overflow-x: hidden !important;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+	background-color: #F5F5F5;
+  border-radius: 30px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+  border-radius: 30px;
+}
+
+::-webkit-scrollbar-thumb {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #0a9137;
+  border-radius: 30px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #065e23;
+    border-radius: 30px;
+}
+
+*:focus {
+    outline: none;
+}
+
+#chatDiv{
+  margin-top: -100px;
+  overflow-x: hidden !important;
+}
+
+.chatBox{
+  width: 70vw;
+  height: 50vh;
+  overflow: auto;
+  border: 1px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 30px;
+  background-color: rgba(10, 145, 55, 0.8);
+  overflow-x: hidden !important;
+}
+
+.msgSpanLeft{
+  float: left;
+  font-family: 'Arimo', sans-serif;
+  background-color: #e3ffe2;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 30px;
+  border-color: #3a8c36;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  padding: 8px 10px;
+  max-width: 400px;
+  min-width: 20px;
+  margin-left: 8px;
+  margin-top: 2.5px;
+  margin-bottom: 2.5px;
+  word-wrap: break-word;
+  clear: both;
+}
+
+.msgSpanRight{
+  float: right;
+  font-family: 'Arimo', sans-serif;
+  background-color: #ccedc2;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 30px;
+  border-color: #59894a;
+  display: inline-block;
+  padding: 8px 10px;
+  position: relative;
+  vertical-align: top;
+  max-width: 400px;
+  min-width: 20px;
+  margin-right: 8px;
+  margin-top: 2.5px;
+  margin-bottom: 2.5px;
+  word-wrap: break-word;
+  clear: both;
+}
+
+.msgSpanRight #popup{
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    font-weight: normal;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 103%;
+}
+
+.msgSpanRight #popup::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent black;
+}
+
+.msgSpanRight:hover #popup{
+  visibility: visible;
+}
+
+.msgSpanLeft #popup{
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    font-weight: normal;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 103%;
+}
+
+.msgSpanLeft #popup::before {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+
+.msgSpanLeft:hover #popup{
+  visibility: visible;
+}
+
+.aliasSpan{
+  font-weight: bold;
+}
+
+input[type=textarea]{
+  width: 100%;
+  padding: 5px 10px;
+  margin: 8px 0;
+  display: inline-block;
+  color: white;
+}
+
+.messageArea{
+  display: flex;
+  flex-direction: row;
+  border: 1px solid;
+  border-radius: 30px;
+  margin-top: 5px;
+  background-color: rgba(10, 145, 55, 0.8);
+}
+
+#msg{
+  flex-grow:2;
+  border: 0;
+  width: 90%;
+  height: 20px;
+  background-color: rgba(10, 145, 55, 0.0);
+}
+
+#send{
+  border-left-color: black;
+  border-left-width: 1px;
+  border-top-style: none;
+  border-bottom-style: none;
+  border-right-style: none;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  background-color: rgba(10, 145, 55, 0.0);
+  width: 95px;
+  height: 46px;
+  cursor: pointer;
+  color: #ffffff;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+
+#send:hover{
+  background-color: #07bc43;
+}
+
+.adminDelete{
+  border: 0;
+  background-color: green;
+  color: white;
+}
+
+.adminDelete:hover{
+  background-color: #2dff5e;
+  color: black;
+}
+
+@media only screen and (max-width: 720px) {
+  body{
+    margin: auto;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  #chatDiv{
+    margin-top: -10vw;
+  }
+  .chatBox{
+    width: 98vw;
+    height: 99vw;
+    overflow: auto;
+    border: 1px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 30px;
+    background-color: rgba(10, 145, 55, 0.8);
+    overflow-x: hidden !important;
+  }
+  .msgSpanLeft{
+    margin-left: 2px;
+  }
+  .msgSpanRight{
+    margin-right: 2px;
+  }
+
+  #msg{
+    flex-grow:2;
+    border: 0;
+    width: 90%;
+    height: 30px;
+    background-color: rgba(10, 145, 55, 0.0);
+  }
+
+  #send{
+    height: 56px;
+  }
+}
+
