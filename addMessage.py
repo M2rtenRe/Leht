@@ -3,6 +3,8 @@
 import cgi,sys,io,re
 import datetime
 
+#test
+
 currentDate = datetime.datetime.now() + datetime.timedelta(hours=2)
 currentDate = currentDate.strftime("%y/%m/%d %H:%M")
 
@@ -36,4 +38,3 @@ with io.open("/home/m2rtenreinaasoriginal/chat.txt", "a", encoding='utf-8') as c
     chatFile.write(result+"\n")
 
 print(message)
-
