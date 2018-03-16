@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import cgi,sys,io,re
 import datetime
-
+#test
 currentDate = datetime.datetime.now() + datetime.timedelta(hours=2)
 currentDate = currentDate.strftime("%y/%m/%d %H:%M")
 
