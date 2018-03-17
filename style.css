@@ -26,6 +26,7 @@ body {
 }
 
 #chatDiv{
+  position: relative;
   margin-top: -100px;
   overflow-x: hidden !important;
 }
@@ -200,7 +201,6 @@ input[type=textarea]{
 }
 
 .welcome{
-  position: absolute;
   font-family: 'Marmelad', sans-serif;
   font-size: 30px; color: #ffffff;
   text-shadow: 2px 2px 4px #000000;
