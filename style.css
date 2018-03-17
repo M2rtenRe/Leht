@@ -1,10 +1,9 @@
 body {
     overflow-x: hidden !important;
 }
-
+/*
 ::-webkit-scrollbar {
   width: 10px;
-	z-index: -1;
 }
 
 ::-webkit-scrollbar-track {
@@ -18,26 +17,26 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #065e23;
 }
-
+*/
 *:focus {
     outline: none;
 }
 
 #chatDiv{
   margin-top: -100px;
-  overflow-x: hidden !important;
+  overflow: hidden;
+  overflow-x:hidden;
 }
 
 .chatBox{
   width: 70vw;
   height: 50vh;
-  overflow: auto;
+  overflow-y:scroll;
   border: 1px;
   border-style: solid;
   border-color: black;
   border-radius: 30px;
   background-color: rgba(10, 145, 55, 0.8);
-  overflow-x: hidden !important;
   padding:10px 0px;
 }
 
