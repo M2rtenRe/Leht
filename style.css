@@ -27,7 +27,7 @@ body {
   overflow-x: hidden !important;
 }
 
-.chatBox{
+.outer{
   height: 50vh;
   width: 70vw;
   overflow: hidden;
@@ -40,7 +40,7 @@ body {
   padding:10px 0px;
 }
 
-.innerBox{
+.chatBox{
   height: 50vh;
   overflow-y:scroll;
 }
