@@ -206,7 +206,10 @@ input[type=textarea]{
   cursor: pointer;
   height: 46px;
   padding: 5px;
-  background-color: rgba(10, 145, 55);
+  background-color: #0a9137;
+  color: #ffffff;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
 }
 
 #logOut:hover{
