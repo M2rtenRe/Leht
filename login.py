@@ -200,14 +200,14 @@ if form.getvalue("Sisesta") != None:
         <body onLoad="saveAlias()">
         	<div id="chatDiv" style="visibility: hidden">
         		<h3 style="font-family: 'Marmelad', sans-serif; font-size: 30px; color: #ffffff; text-shadow: 2px 2px 4px #000000;">Teretulemast <span id="aliasName"/></h3>
-        		<div class="outer"><div id="chatBoxDiv" class="chatBox">
+                <button id="logOut" onclick="window.history.back();">Välja logimine</button>
+                <div class="outer"><div id="chatBoxDiv" class="chatBox">
                 </div>
         		</div>
                 <div class="messageArea">
         		<input type="textarea" id="msg" onkeypress="enterKeyPress()">
         		<button id="send" onclick="addMessage()">Saada</button>
                 </div>
-                <button id="logOut" onclick="window.history.back();">Välja logimine</button>
         	</div>
         </body>
         """)
