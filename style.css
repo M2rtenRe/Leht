@@ -199,6 +199,13 @@ input[type=textarea]{
   background-color: #07bc43;
 }
 
+.welcome{
+  position: absolute;
+  font-family: 'Marmelad', sans-serif;
+  font-size: 30px; color: #ffffff;
+  text-shadow: 2px 2px 4px #000000;
+}
+
 #logOut{
   position: relative;
   left: 91%;
