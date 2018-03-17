@@ -200,7 +200,7 @@ input[type=textarea]{
 }
 
 #logOut{
-  position: absolute;
+  position: relative;
   right: 300px;
   top: 140px;
   border: 1px solid black;
