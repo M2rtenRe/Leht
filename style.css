@@ -41,6 +41,7 @@ body {
 }
 
 .innerBox{
+  height: 50vh;
   overflow-y:scroll;
 }
 
