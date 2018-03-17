@@ -1,7 +1,7 @@
 body {
     overflow-x: hidden !important;
 }
-/*
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -17,7 +17,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #065e23;
 }
-*/
+
 *:focus {
     outline: none;
 }
@@ -37,7 +37,6 @@ body {
   border-color: black;
   border-radius: 30px;
   background-color: rgba(10, 145, 55, 0.8);
-  padding:10px 0px;
 }
 
 .chatBox{
