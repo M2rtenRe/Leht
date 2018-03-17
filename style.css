@@ -40,8 +40,7 @@ body {
   border: 1px;
   border-style: solid;
   border-color: black;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
+  border-radius: 30px;
   background-color: rgba(10, 145, 55, 0.8);
 }
 
