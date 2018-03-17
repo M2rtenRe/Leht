@@ -3,9 +3,8 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 20px;
+  width: 10px;
 	background-color: #F5F5F5;
-  border-radius: 30px;
 }
 
 ::-webkit-scrollbar-track {
@@ -20,7 +19,6 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #065e23;
-    border-radius: 30px;
 }
 
 *:focus {
