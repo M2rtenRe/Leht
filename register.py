@@ -53,7 +53,7 @@ print('''<!DOCTYPE html>
 <body style="display:flex; padding: 0; width: 100%; overflow:hidden; align-items: center; justify-content: center; margin-top:10%; background-image:url(\'https://i.imgur.com/Tzs62qH.png\');">''')
 
 def createUser(newname,newpass):
-    with open("banned.txt", "r") as f:
+    with open("/home/m2rtenreinaasoriginal/ipBanned.txt", "r") as f:
         for line in f.readlines():
             if cgi.escape(os.environ["HTTP_X_FORWARDED_FOR"]).strip() == line.strip():
                 return "Banned"
@@ -111,4 +111,3 @@ print('''<h1 style="font-family: 'Krona One', sans-serif; font-size: 50px; color
 
 print('</body>')
 print('</html>')
-
