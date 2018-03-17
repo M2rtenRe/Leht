@@ -28,9 +28,10 @@ body {
 }
 
 .chatBox{
+  height: 50vh;
   width: 70vw;
   overflow: hidden;
-  overflow-x:hidden;
+  overflow-x: hidden;
   border: 1px;
   border-style: solid;
   border-color: black;
@@ -40,7 +41,6 @@ body {
 }
 
 .innerBox{
-  height: 50vh;
   overflow-y:scroll;
 }
 
