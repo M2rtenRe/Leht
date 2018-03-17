@@ -2,23 +2,21 @@ body {
     overflow-x: hidden !important;
 }
 
-.chatBox::-webkit-scrollbar {
-  margin-right: 20px;
+::-webkit-scrollbar {
   width: 10px;
-	background-color: #F5F5F5;
+	height: 10px;
 }
 
-.chatBox::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+::-webkit-scrollbar-track {
+	background: none;
 }
 
-.chatBox::-webkit-scrollbar-thumb {
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #0a9137;
+::-webkit-scrollbar-thumb {
+	border-radius: 100px;
+	background-color: #ccc;
 }
 
-.chatBox::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: #065e23;
 }
 
