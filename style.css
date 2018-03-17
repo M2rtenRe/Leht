@@ -207,7 +207,7 @@ input[type=textarea]{
   margin-top: 5px;
   cursor: pointer;
   height: 46px;
-  padding: 5px;
+  padding: 10px 0px;
   background-color: #0a9137;
   color: #ffffff;
   -webkit-transition-duration: 0.4s;
