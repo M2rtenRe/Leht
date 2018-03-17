@@ -3,6 +3,7 @@ body {
 }
 
 ::-webkit-scrollbar {
+  background-color: #0bc649;
   width: 10px;
 }
 
