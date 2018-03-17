@@ -98,7 +98,7 @@ if form.getvalue("Sisesta") != None:
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link href="https://fonts.googleapis.com/css?family=Arimo|Marmelad" rel="stylesheet">
             <script>
-                document.title = "Jututuba"
+                document.title = "Jututuba";
         		var alias = \""""+userIn+"""\";
         		var timer;
         		var chatText;
