@@ -44,11 +44,7 @@ body {
   border-radius: 30px;
   background-color: rgba(10, 145, 55, 0.8);
   overflow-x: hidden !important;
-<<<<<<< HEAD
-  padding:6px 0px;
-=======
   box-sizing: border-box;
->>>>>>> 935defe4796ba271d795e7208122d172e2d2cc30
 }
 
 .msgSpanLeft{
