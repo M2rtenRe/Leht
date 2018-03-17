@@ -201,8 +201,8 @@ input[type=textarea]{
 
 #logOut{
   position: relative;
-  left: 90%;
-  top: 5%;
+  left: 92%;
+  bottom: 10%;
   border: 1px solid black;
   border-radius: 30px;
   margin-top: 5px;
