@@ -3,7 +3,6 @@ body {
 }
 
 ::-webkit-scrollbar {
-  background-color: #0bc649;
   width: 10px;
 }
 
@@ -12,7 +11,8 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: #ccc;
+    border-radius: 10px;
+    background-color: #0bc649;
 }
 
 ::-webkit-scrollbar-thumb:hover {
