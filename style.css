@@ -41,7 +41,7 @@ body {
   border-style: solid;
   border-color: black;
   border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+  border-bottom-left-radius: 30px;
   background-color: rgba(10, 145, 55, 0.8);
 }
 
