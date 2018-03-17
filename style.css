@@ -220,17 +220,24 @@ input[type=textarea]{
   #chatDiv{
     margin-top: -10vw;
   }
-  .chatBox{
-    width: 98vw;
+
+  .outer{
     height: 99vw;
-    overflow: auto;
+    width: 98vw;
+    overflow: hidden;
+    overflow-x: hidden !important;
     border: 1px;
     border-style: solid;
     border-color: black;
     border-radius: 30px;
     background-color: rgba(10, 145, 55, 0.8);
-    overflow-x: hidden !important;
   }
+
+  .chatBox{
+    height: 99vw;
+    overflow-y: hidden;
+  }
+
   .msgSpanLeft{
     margin-left: 2px;
   }
