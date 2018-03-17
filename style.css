@@ -44,6 +44,7 @@ body {
   border-radius: 30px;
   background-color: rgba(10, 145, 55, 0.8);
   overflow-x: hidden !important;
+  box-sizing: border-box;
 }
 
 .msgSpanLeft{
@@ -249,4 +250,3 @@ input[type=textarea]{
     height: 56px;
   }
 }
-
