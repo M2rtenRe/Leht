@@ -24,20 +24,24 @@ body {
 
 #chatDiv{
   margin-top: -100px;
-  overflow: hidden;
-  overflow-x:hidden;
+  overflow-x: hidden !important;
 }
 
 .chatBox{
   width: 70vw;
-  height: 50vh;
-  overflow-y:scroll;
+  overflow: hidden;
+  overflow-x:hidden;
   border: 1px;
   border-style: solid;
   border-color: black;
   border-radius: 30px;
   background-color: rgba(10, 145, 55, 0.8);
   padding:10px 0px;
+}
+
+.innerBox{
+  height: 50vh;
+  overflow-y:scroll;
 }
 
 .msgSpanLeft{

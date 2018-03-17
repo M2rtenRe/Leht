@@ -201,6 +201,8 @@ if form.getvalue("Sisesta") != None:
         	<div id="chatDiv" style="visibility: hidden">
         		<h3 style="font-family: 'Marmelad', sans-serif; font-size: 30px; color: #ffffff; text-shadow: 2px 2px 4px #000000;">Teretulemast <span id="aliasName"/></h3>
         		<div id="chatBoxDiv" class="chatBox">
+                <div class="innerBox">
+                </div>
         		</div>
                 <div class="messageArea">
         		<input type="textarea" id="msg" onkeypress="enterKeyPress()">
@@ -222,4 +224,3 @@ print('''
 print("</form>")
 print('</body>')
 print('</html>')
-
