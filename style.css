@@ -1,5 +1,5 @@
 body {
-    overflow-x: hidden !important;
+  overflow-x: hidden !important;
 }
 
 ::-webkit-scrollbar {
@@ -11,16 +11,17 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #007f2a;
+  border: 1px solid white;
+  border-radius: 10px;
+  background-color: #007f2a;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #065e23;
+  background: #065e23;
 }
 
 *:focus {
-    outline: none;
+  outline: none;
 }
 
 #chatDiv{
