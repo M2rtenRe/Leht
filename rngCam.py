@@ -6,7 +6,7 @@ import cv2,os,urllib.request,random,string
 def captureCam(time):
     count = 0
     imageCount = "shot"+str(count)+".jpg"
-    imgUrl = "http://84.50.234.221:9002/shot.jpg"
+    imgUrl = os.environ.get('RNGCAM_IP')
     while os.path.exists("/home/m2rtenreinaasoriginal/Pictures/"+str(imageCount)):
         count += 1
         imageCount = "shot"+str(count)+".jpg"
@@ -27,4 +27,3 @@ def captureCam(time):
         random.seed(bits)
         returnable = ''.join(random.choice(string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation) for n in range(256)).replace("-", "").replace(",","").replace(":","")
         return returnable
-
