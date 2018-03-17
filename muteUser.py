@@ -23,6 +23,6 @@ if command == "unmute":
 
     f = io.open("/home/m2rtenreinaasoriginal/banned.txt", "w", encoding='utf-8')
     for line in lines:
-        if line != alias:
-            f.write(line+"\n")
+        if line != alias+"\n":
+            f.write(line)
     f.close()
