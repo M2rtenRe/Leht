@@ -31,7 +31,6 @@ body {
 
 #chatDiv{
   margin-top: -100px;
-  overflow: hidden;
   overflow-x: hidden !important;
 }
 
@@ -45,11 +44,7 @@ body {
   border-radius: 30px;
   background-color: rgba(10, 145, 55, 0.8);
   overflow-x: hidden !important;
-<<<<<<< HEAD
   box-sizing: border-box;
-=======
-  overflow-y: auto;
->>>>>>> 5bccd89d8dae45076a178ce18d4a16faaeb0c81c
 }
 
 .msgSpanLeft{
