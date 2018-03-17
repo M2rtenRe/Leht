@@ -199,6 +199,17 @@ input[type=textarea]{
   background-color: #07bc43;
 }
 
+#logOut{
+  border: 1px solid;
+  border-radius: 30px;
+  margin-top: 5px;
+  background-color: rgba(10, 145, 55);
+}
+
+#logOut:hover{
+  background-color: #07bc43;
+}
+
 .adminDelete{
   border: 0;
   background-color: green;

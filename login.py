@@ -207,7 +207,7 @@ if form.getvalue("Sisesta") != None:
         		<input type="textarea" id="msg" onkeypress="enterKeyPress()">
         		<button id="send" onclick="addMessage()">Saada</button>
                 </div>
-                <button onclick="window.history.back();">Välja logimine</button>
+                <button id="logOut" onclick="window.history.back();">Välja logimine</button>
         	</div>
         </body>
         """)
