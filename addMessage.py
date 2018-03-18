@@ -4,7 +4,7 @@ import cgi,sys,io,re
 import datetime
 
 currentDate = datetime.datetime.now() + datetime.timedelta(hours=2)
-currentDate = currentDate.strftime("%y/%m/%d %H:%M")
+currentDate = currentDate.strftime("%m/%d %H:%M")
 
 TAG_RE = re.compile(r'<[^>]+>')
 result = ""
