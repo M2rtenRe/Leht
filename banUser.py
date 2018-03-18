@@ -42,7 +42,7 @@ if command == "unban":
     with open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r") as f:
         lines = f.readlines()
         for line in lines:
-            if line.split(":")[0].strip() == user:
+            if line.split(":")[0].strip() == "#"+user:
                 ip = line.split(",")[1]
                 f = open("/home/m2rtenreinaasoriginal/ipBanned.txt", "r")
                 lines = f.readlines()
