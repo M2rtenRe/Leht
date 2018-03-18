@@ -177,7 +177,7 @@ if form.getvalue("Sisesta") != None:
                             mutedName = msg.substring(8);
                             muteUser("unmute",mutedName);
                         }
-                        else if(msg.substring(0,7) == "/clearall"){
+                        else if(msg.substring(0,8) == "/clearall"){
                             clearAll();
                         }
                         else{
