@@ -114,6 +114,13 @@ if form.getvalue("Sisesta") != None:
                     document.body.style.backgroundPosition = "80\% 70\%";
                 }
 
+                function clearAll(){
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.open("POST", "clearAll.py", true);
+        		    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        		    xhttp.send(null);
+                }
+
                 function muteUser(command,mutedname){
                     var xhttp = new XMLHttpRequest();
                     xhttp.open("POST", "muteUser.py", true);
@@ -169,6 +176,10 @@ if form.getvalue("Sisesta") != None:
                         else if(msg.substring(0,7) == "/unmute"){
                             mutedName = msg.substring(8);
                             muteUser("unmute",mutedName);
+                        }
+                        else if(msg.substring(0,8) == "/clearall"){
+                            mutedName = msg.substring(9);
+                            clearAll();
                         }
                         else{
                 		    var xhttp = new XMLHttpRequest();
