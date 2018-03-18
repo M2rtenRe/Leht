@@ -1,4 +1,4 @@
 #!/usr/bin/python
 import cgi
 
-open('file.txt', 'w').close()
+open('/home/m2rtenreinaasoriginal/chat.txt', 'w').close()
