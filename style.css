@@ -188,7 +188,7 @@ input[type=textarea]{
   border-right-style: none;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
-  background-color: rgba(10, 145, 55, 0.5);
+  background-color: rgba(10, 145, 55, 1);
   width: 95px;
   height: 46px;
   cursor: pointer;
