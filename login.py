@@ -182,7 +182,6 @@ if form.getvalue("Sisesta") != None:
                         }
                         else{
                 		    var xhttp = new XMLHttpRequest();
-                            console.log(msg);
                 		    xhttp.open(\"POST\", \"addMessage.py\", true);
                 		    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 		    xhttp.send("message="+alias+": "+msg);
