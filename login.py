@@ -103,16 +103,6 @@ if form.getvalue("Sisesta") != None:
         		var timer;
         		var chatText;
                 var audio = new Audio('MSN.wav');
-                var w = window,
-                    d = document,
-                    e = d.documentElement,
-                    g = d.getElementsByTagName('body')[0],
-                    x = w.innerWidth || e.clientWidth || g.clientWidth;
-                document.body.style.background = "url(\'https://i.imgur.com/j8IEfV4.gif\')";
-                document.body.style.backgroundPositionY = "-5vw";
-                if (x < 720){
-                    document.body.style.backgroundPosition = "80\% 70\%";
-                }
 
                 function banUser(command, user){
                     var xhttp = new XMLHttpRequest();
