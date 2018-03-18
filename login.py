@@ -188,12 +188,12 @@ if form.getvalue("Sisesta") != None:
                             clearAll();
                         }
                         else if(msg.substring(0,4) == "/ban"){
-                            banUser = msg.substring(5);
-                            banUser("ban", banUser);
+                            bannedUser = msg.substring(5);
+                            banUser("ban", bannedUser);
                         }
                         else if(msg.substring(0,6) == "/unban"){
-                            banUser = msg.substring(7);
-                            banUser("unban", banUser);
+                            unBannedUser = msg.substring(7);
+                            banUser("unban", unBannedUser);
                         }
                         else{
                 		    var xhttp = new XMLHttpRequest();
