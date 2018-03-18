@@ -114,7 +114,7 @@ if form.getvalue("Sisesta") != None:
                     document.body.style.backgroundPosition = "80\% 70\%";
                 }
 
-                fucntion banUser(command, user){
+                function banUser(command, user){
                     var xhttp = new XMLHttpRequest();
                     xhttp.open("POST", "banUser.py", true);
         		    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
