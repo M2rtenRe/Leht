@@ -41,7 +41,7 @@ body {
   border-style: solid;
   border-color: black;
   border-radius: 30px;
-  background-color: rgba(10, 145, 55, 0.8);
+  background-color: rgba(10, 145, 55, 0.5);
 }
 
 .chatBox{
@@ -169,7 +169,7 @@ input[type=textarea]{
   border: 1px solid;
   border-radius: 30px;
   margin-top: 5px;
-  background-color: rgba(10, 145, 55, 0.8);
+  background-color: rgba(10, 145, 55, 0.5);
 }
 
 #msg{
@@ -259,7 +259,7 @@ input[type=textarea]{
     border-style: solid;
     border-color: black;
     border-radius: 30px;
-    background-color: rgba(10, 145, 55, 0.8);
+    background-color: rgba(10, 145, 55, 0.5);
   }
 
   .chatBox{
