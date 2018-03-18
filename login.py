@@ -114,6 +114,13 @@ if form.getvalue("Sisesta") != None:
                     document.body.style.backgroundPosition = "80\% 70\%";
                 }
 
+                fucntion banUser(command, user){
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.open("POST", "banUser.py", true);
+        		    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        		    xhttp.send("alias="+user+"&command="+command);
+                }
+
                 function clearAll(){
                     var xhttp = new XMLHttpRequest();
                     xhttp.open("POST", "clearAll.py", true);
@@ -179,6 +186,14 @@ if form.getvalue("Sisesta") != None:
                         }
                         else if(msg.substring(0,9) == "/clearall"){
                             clearAll();
+                        }
+                        else if(msg.substring(0,4) == "/ban"){
+                            banUser = msg.substring(5);
+                            banUser("ban", banUser);
+                        }
+                        else if(msg.substring(0,6) == "/unban"){
+                            banUser = msg.substring(7);
+                            banUser("unban", banUser);
                         }
                         else{
                 		    var xhttp = new XMLHttpRequest();
