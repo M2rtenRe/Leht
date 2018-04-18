@@ -57,11 +57,11 @@ def checkUser(passwordIn):
     if userIn == None:
         userIn = ''.join(random.choice(string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation) for n in range(10)).replace("-", "").replace(",","").replace(":","")
     for line in c.fetchall():
-        if line[0].lower() == userIn.lower():
-            if line[4] == "YES":
+        if line[0].strip().lower() == userIn.strip().lower():
+            if line[4].strip() == "YES":
                 return "Banned"
 
-            userIn = line[0]
+            userIn = line[0].strip()
             return checkPass(passwordIn)
     return False
     f.close()
@@ -71,10 +71,10 @@ def checkPass(passwordIn):
         passwordIn = "aASDASfaSFAWRW232"
     for line in c.fetchall():
         pp = ""
-        pp += line[2]
-        pp += passwordIn
+        pp += line[2].strip()
+        pp += passwordIn.strip()
         passInHash = hashlib.sha512(pp.strip().encode()).hexdigest()
-        if line[1] == passInHash:
+        if line[1].strip() == passInHash:
             return True
     return False
     f.close()
