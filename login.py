@@ -1,5 +1,10 @@
 #!/usr/bin/python
-import hashlib,sys,getpass,base64,os,random,string,urllib.request,subprocess,socket,rngCam,time,cgi
+import hashlib,sys,getpass,base64,os,random,string,urllib.request,subprocess,socket,rngCam,time,cgi,sqlite3
+
+conn = sqlite3.connect('/home/m2rtenreinaasoriginal/Kasutajad.db')
+
+c = conn.cursor()
+with conn: c.execute("SELECT * FROM kasutajad")
 
 loginCount = 0
 userCount = 0
@@ -49,34 +54,25 @@ print('''<!DOCTYPE html>
 
 def checkUser(passwordIn):
     global userIn
-    f = open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r")
-    passListDecode = f.read()
-    passList = passListDecode.splitlines()
     if userIn == None:
         userIn = ''.join(random.choice(string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation) for n in range(10)).replace("-", "").replace(",","").replace(":","")
-    for line in passList:
-        if line.split(":")[0].strip().lower() == userIn.lower():
-            userIn = line.split(":")[0].strip()
-            f.close()
+    for line in c.fetchall():
+        if line[0].lower() == userIn.lower():
+            userIn = line[0]
             return checkPass(passwordIn)
     return False
     f.close()
 
 def checkPass(passwordIn):
-    f = open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r")
-    passListDecode = f.read()
-    passList = passListDecode.splitlines()
     if passwordIn == None:
-        passwordIn = "a"
-    for line in passList:
+        passwordIn = "aASDASfaSFAWRW232"
+    for line in c.fetchall:
         pp = ""
-        pp += line.split("-")[1].split(",")[0].strip()
+        pp += line[2]
         pp += passwordIn
         passInHash = hashlib.sha512(pp.strip().encode()).hexdigest()
-        if line.split(":")[1].strip().split("-")[0].strip() == passInHash:
-            f.close()
+        if line[1] == passInHash:
             return True
-
     return False
     f.close()
 
