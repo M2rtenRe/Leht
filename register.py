@@ -76,7 +76,7 @@ def createUser(newname,newpass):
     newPasss += saltPass
     newPasss += newpass
     newPassHash = hashlib.sha512(newPasss.strip().encode()).hexdigest()
-    with conn: c.execute("INSERT INTO kasutajad VALUES (:user, :hashedpass, :salt, :ip, :banned)", {'user': newname, 'hashedpass': newPassHash, 'salt': saltPass, 'ip': cgi.escape(os.environ["HTTP_X_FORWARDED_FOR"]), 'banned': "NO"})
+    with conn: c.execute("INSERT INTO kasutajad VALUES (?, ?, ?, ?, ?)", (newname, newPassHash, saltPass, cgi.escape(os.environ["HTTP_X_FORWARDED_FOR"]), "NO"))
     return "Tehtud"
 
 form = cgi.FieldStorage()
