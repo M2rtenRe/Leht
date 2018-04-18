@@ -66,7 +66,7 @@ def checkUser(passwordIn):
 def checkPass(passwordIn):
     if passwordIn == None:
         passwordIn = "aASDASfaSFAWRW232"
-    for line in c.fetchall:
+    for line in c.fetchall():
         pp = ""
         pp += line[2]
         pp += passwordIn
