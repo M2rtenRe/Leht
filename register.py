@@ -1,5 +1,9 @@
 #!/usr/bin/python
-import hashlib,sys,getpass,base64,os,random,urllib.request,subprocess,socket,rngCam,time,cgi
+import hashlib,sys,getpass,base64,os,random,urllib.request,subprocess,socket,rngCam,time,cgi,sqlite3
+
+conn = sqlite3.connect('/home/m2rtenreinaasoriginal/Kasutajad.db')
+
+c = conn.cursor()
 
 print("Content-type:text/html\r\n\r\n")
 
@@ -64,8 +68,8 @@ def createUser(newname,newpass):
         return "Kasutajanimi"
     elif newpass == None:
         return "Parool"
-    for line in passList:
-        if newname.lower() == line.split(":")[0].strip().lower():
+    for line in c.fetchall():
+        if newname.lower() == line[0].lower():
             return "Kasutusel"
     f = open("/home/m2rtenreinaasoriginal/kasutajad.txt", "a")
     saltPass = rngCam.captureCam(0)
