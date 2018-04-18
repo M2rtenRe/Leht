@@ -4,6 +4,8 @@ import hashlib,sys,getpass,base64,os,random,urllib.request,subprocess,socket,rng
 conn = sqlite3.connect('/home/m2rtenreinaasoriginal/Kasutajad.db')
 
 c = conn.cursor()
+with conn:
+    c.execute("SELECT * FROM kasutajad")
 
 print("Content-type:text/html\r\n\r\n")
 
