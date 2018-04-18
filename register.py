@@ -59,10 +59,9 @@ print('''<!DOCTYPE html>
 <body style="display:flex; padding: 0; width: 100%; overflow:hidden; align-items: center; justify-content: center; margin-top:10%; background-image:url(\'https://i.imgur.com/Tzs62qH.png\');">''')
 
 def createUser(newname,newpass):
-    with open("/home/m2rtenreinaasoriginal/ipBanned.txt", "r") as f:
-        for line in f.readlines():
-            if cgi.escape(os.environ["HTTP_X_FORWARDED_FOR"]).strip() == line.strip():
-                return "Banned"
+    for line in c.fetchall():
+        if cgi.escape(os.environ["HTTP_X_FORWARDED_FOR"]).strip() == line[3]:
+            return "Olemas"
     if newname == None:
         return "Kasutajanimi"
     elif newpass == None:
@@ -89,8 +88,8 @@ if form.getvalue("Sisesta") != None:
     newName = form.getvalue("username")
     newPass = form.getvalue("password")
     newUserCheck = createUser(newName,newPass)
-    if newUserCheck == "Banned":
-        print('<p style="font-family: \'Montserrat\', sans-serif; position: absolute; margin-top: -200px; color: #ffffff;">ERROR: IP on keelatud!</p>')
+    if newUserCheck == "Olemas":
+        print('<p style="font-family: \'Montserrat\', sans-serif; position: absolute; margin-top: -200px; color: #ffffff;">ERROR: Oled selle IP-ga juba kasutaja teinud!</p>')
     if newUserCheck == "Uhendus":
         print('<p style="font-family: \'Montserrat\', sans-serif; position: absolute; margin-top: -200px; color: #ffffff;">ERROR: Ei suutnud serveriga uhendust luua!</p>')
     if newUserCheck == "Kasutajanimi":
