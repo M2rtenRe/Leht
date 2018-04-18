@@ -63,9 +63,6 @@ def createUser(newname,newpass):
         for line in f.readlines():
             if cgi.escape(os.environ["HTTP_X_FORWARDED_FOR"]).strip() == line.strip():
                 return "Banned"
-    f = open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r")
-    passListDecode = f.read()
-    passList = passListDecode.splitlines()
     if newname == None:
         return "Kasutajanimi"
     elif newpass == None:
@@ -73,7 +70,6 @@ def createUser(newname,newpass):
     for line in c.fetchall():
         if newname.lower() == line[0].lower():
             return "Kasutusel"
-    f = open("/home/m2rtenreinaasoriginal/kasutajad.txt", "a")
     saltPass = rngCam.captureCam(0)
     if saltPass == "No connection":
         return "Uhendus"
@@ -81,8 +77,7 @@ def createUser(newname,newpass):
     newPasss += saltPass
     newPasss += newpass
     newPassHash = hashlib.sha512(newPasss.strip().encode()).hexdigest()
-    f.write(newname+":"+newPassHash+"-"+saltPass+","+cgi.escape(os.environ["HTTP_X_FORWARDED_FOR"]).strip()+"\n")
-    f.close()
+    with conn: c.execute("INSERT INTO kasutajad VALUES (?, ?, ?, ?, ?)", newname, newPassHash, saltPass, cgi.escape(os.environ["HTTP_X_FORWARDED_FOR"]).strip()+"\n")
     return "Tehtud"
 
 form = cgi.FieldStorage()
