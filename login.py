@@ -58,6 +58,9 @@ def checkUser(passwordIn):
         userIn = ''.join(random.choice(string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation) for n in range(10)).replace("-", "").replace(",","").replace(":","")
     for line in c.fetchall():
         if line[0].lower() == userIn.lower():
+            if line[4] == "YES":
+                return "Banned"
+
             userIn = line[0]
             return checkPass(passwordIn)
     return False
@@ -85,6 +88,8 @@ if form.getvalue("Sisesta") != None:
     userIn = form.getvalue("username")
     passwordIn = form.getvalue("password")
     userCheck = checkUser(passwordIn)
+    if userCheck == "Banned":
+        print('<p style="font-family: \'Montserrat\', sans-serif; position: absolute; margin-top: -200px; color: #ffffff;">ERROR: Kasutaja on keelatud!</p>')
     if userCheck == False:
         print('<p style="font-family: \'Montserrat\', sans-serif; position: absolute; margin-top: -200px; color: #ffffff;">ERROR: Vale kasutajanimi voi parool!</p>')
     if userCheck == True:
