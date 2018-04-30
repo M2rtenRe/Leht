@@ -4,8 +4,7 @@ import hashlib,sys,getpass,base64,os,random,urllib.request,subprocess,socket,rng
 conn = sqlite3.connect('/home/m2rtenreinaasoriginal/Kasutajad.db')
 
 c = conn.cursor()
-with conn:
-    c.execute("SELECT * FROM kasutajad")
+c.execute("SELECT * FROM kasutajad")
 
 print("Content-type:text/html\r\n\r\n")
 
@@ -111,3 +110,6 @@ print('''<h1 style="font-family: 'Krona One', sans-serif; font-size: 50px; color
 
 print('</body>')
 print('</html>')
+
+conn.commit()
+conn.close()

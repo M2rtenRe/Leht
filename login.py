@@ -4,7 +4,7 @@ import hashlib,sys,getpass,base64,os,random,string,urllib.request,subprocess,soc
 conn = sqlite3.connect('/home/m2rtenreinaasoriginal/Kasutajad.db')
 
 c = conn.cursor()
-with conn: c.execute("SELECT * FROM kasutajad")
+c.execute("SELECT * FROM kasutajad")
 
 loginCount = 0
 userCount = 0
@@ -239,3 +239,5 @@ print('''
 print("</form>")
 print('</body>')
 print('</html>')
+conn.commit()
+conn.close()
