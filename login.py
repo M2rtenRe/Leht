@@ -69,6 +69,7 @@ def checkUser(passwordIn):
 def checkPass(passwordIn):
     if passwordIn == None:
         passwordIn = "aASDASfaSFAWRW232"
+    c.execute("SELECT * FROM kasutajad")
     for line in c.fetchall():
         pp = ""
         pp += line[2].strip()

@@ -65,6 +65,7 @@ def createUser(newname,newpass):
         return "Kasutajanimi"
     elif newpass == None:
         return "Parool"
+    c.execute("SELECT * FROM kasutajad")
     for line in c.fetchall():
         if newname.lower() == line[0].lower():
             return "Kasutusel"
