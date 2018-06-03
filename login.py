@@ -1,10 +1,5 @@
 #!/usr/bin/python
-import hashlib,sys,getpass,base64,os,random,string,urllib.request,subprocess,socket,rngCam,time,cgi,sqlite3
-
-conn = sqlite3.connect('/home/m2rtenreinaasoriginal/Kasutajad.db')
-
-c = conn.cursor()
-c.execute("SELECT * FROM kasutajad")
+import io,uuid,hashlib,sys,getpass,base64,os,random,string,urllib.request,subprocess,socket,rngCam,time,cgi
 
 loginCount = 0
 userCount = 0
@@ -54,31 +49,61 @@ print('''<!DOCTYPE html>
 
 def checkUser(passwordIn):
     global userIn
+    f = io.open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r", encoding='utf-8')
+    passListDecode = f.read()
+    passList = passListDecode.splitlines()
     if userIn == None:
         userIn = ''.join(random.choice(string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation) for n in range(10)).replace("-", "").replace(",","").replace(":","")
-    for line in c.fetchall():
-        if line[0].strip().lower() == userIn.strip().lower():
-            if line[4].strip() == "YES":
-                return "Banned"
-
-            userIn = line[0].strip()
+    for line in passList:
+        if line.split(":")[0].strip().lower() == userIn.lower():
+            userIn = line.split(":")[0].strip()
+            f.close()
             return checkPass(passwordIn)
     return False
     f.close()
 
 def checkPass(passwordIn):
+    f = io.open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r", encoding='utf-8')
+    passListDecode = f.read()
+    passList = passListDecode.splitlines()
     if passwordIn == None:
-        passwordIn = "aASDASfaSFAWRW232"
-    c.execute("SELECT * FROM kasutajad")
-    for line in c.fetchall():
+        passwordIn = "a"
+    for line in passList:
         pp = ""
-        pp += line[2].strip()
-        pp += passwordIn.strip()
+        pp += line.split("-")[1].split(",")[0].strip()
+        pp += passwordIn
         passInHash = hashlib.sha512(pp.strip().encode()).hexdigest()
-        if line[1].strip() == passInHash:
+        if line.split(":")[1].strip().split("-")[0].strip() == passInHash:
+            f.close()
             return True
+
     return False
     f.close()
+
+def setGUID(user):
+    guid = "{"+str(uuid.uuid4())+"}"
+    f = io.open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r", encoding='utf-8')
+    lines = f.readlines()
+    f.close()
+
+    f = io.open("/home/m2rtenreinaasoriginal/kasutajad.txt", "w", encoding='utf-8')
+    for line in lines:
+        if line.split(":")[0] == user:
+            userLine = line
+    f.close()
+
+    with io.open("/home/m2rtenreinaasoriginal/kasutajad.txt", "w", encoding='utf-8') as f:
+        for line in lines:
+            if line == userLine:
+                curGUID = line.split(",")[2]
+                userLine = ""
+                finalWrite = userLine+line.replace(curGUID, guid, 1)+"\n"
+                f.write(finalWrite)
+            if line != userLine:
+                if line.split(":")[0] != user:
+                    f.write(line)
+    return guid
+
 
 form = cgi.FieldStorage()
 if form.getvalue("back") != None:
@@ -89,11 +114,10 @@ if form.getvalue("Sisesta") != None:
     userIn = form.getvalue("username")
     passwordIn = form.getvalue("password")
     userCheck = checkUser(passwordIn)
-    if userCheck == "Banned":
-        print('<p style="font-family: \'Montserrat\', sans-serif; position: absolute; margin-top: -200px; color: #ffffff;">ERROR: Kasutaja on keelatud!</p>')
     if userCheck == False:
         print('<p style="font-family: \'Montserrat\', sans-serif; position: absolute; margin-top: -200px; color: #ffffff;">ERROR: Vale kasutajanimi voi parool!</p>')
     if userCheck == True:
+        GUID = setGUID(userIn)
         print("""
         <head>
         	<link rel="stylesheet" type="text/css" href="style.css">
@@ -101,10 +125,9 @@ if form.getvalue("Sisesta") != None:
             <link href="https://fonts.googleapis.com/css?family=Arimo|Marmelad" rel="stylesheet">
             <script>
                 document.title = "Jututuba";
-        		var alias = \""""+userIn+"""\";
+        		var GUID = \""""+GUID+"""\";
         		var timer;
         		var chatText;
-                var audio = new Audio('MSN.wav');
 
                 function banUser(command, user){
                     var xhttp = new XMLHttpRequest();
@@ -138,14 +161,13 @@ if form.getvalue("Sisesta") != None:
         		function saveAlias(){
         			updateScroll();
         			this.document.getElementById("chatDiv").style.visibility = "visible";
-                    this.document.getElementById("aliasName").innerHTML = alias;
+                    this.document.getElementById("aliasName").innerHTML = \""""+userIn+"""\";
         			timer = setInterval(function(){ getChatText() }, 500);
         		}
 
         		function setChatText(txt){
         			this.document.getElementById("chatBoxDiv").innerHTML = txt;
         			if(txt != chatText){
-                        audio.play();
                         updateScroll();
         			}
         			chatText = txt;
@@ -160,14 +182,14 @@ if form.getvalue("Sisesta") != None:
         		    };
         		    xhttp.open("POST", "getChat.py", true);
         		    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        		    xhttp.send("alias="+alias);
+        		    xhttp.send("GUID="+GUID);
         		}
 
         		function addMessage(){
         			updateScroll();
         			var msg = this.document.getElementById("msg").value;
         			this.document.getElementById("msg").value = "";
-                    if (alias == "M2rtenRe"){
+                    if (\""""+userIn+"""\" == "M2rtenRe"){
                         if (msg.substring(0,5) == "/mute"){
                             mutedName = msg.substring(6);
                             muteUser("mute",mutedName);
@@ -191,14 +213,14 @@ if form.getvalue("Sisesta") != None:
                 		    var xhttp = new XMLHttpRequest();
                 		    xhttp.open(\"POST\", \"addMessage.py\", true);
                 		    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                		    xhttp.send("message="+alias+": "+msg);
+                		    xhttp.send("message="+GUID+": "+msg);
                         }
                     }
                     else{
                         var xhttp = new XMLHttpRequest();
                         xhttp.open(\"POST\", \"addMessage.py\", true);
                         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                        xhttp.send("message="+alias+": "+msg);
+                        xhttp.send("message="+GUID+": "+msg);
                     }
                 }
 
@@ -240,5 +262,3 @@ print('''
 print("</form>")
 print('</body>')
 print('</html>')
-conn.commit()
-conn.close()

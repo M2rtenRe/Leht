@@ -10,7 +10,13 @@ chatFile = io.open("/home/m2rtenreinaasoriginal/chat.txt", "r", encoding='utf-8'
 result = ""
 
 form = cgi.FieldStorage()
-alias = form.getvalue("alias")
+GUID = form.getvalue("GUID")
+
+with io.open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r", encoding='utf-8') as f:
+	lines = f.readlines()
+	for line in lines:
+		if line.split(",")[3] == GUID:
+			alias = line.split(":")[0]
 
 print("Content-type: text/html")
 print("")
@@ -34,5 +40,3 @@ else:
 			result += ':'+row.split(":", 2)[2]+'</span><br>'
 
 print(result)
-
-

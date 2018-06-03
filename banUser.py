@@ -12,7 +12,7 @@ if command == "ban":
         lines = f.readlines()
         for line in lines:
             if line.split(":")[0].strip() == user:
-                ip = line.split(",")[1]
+                ip = line.split(",")[1].split(",")[0]
                 with open("/home/m2rtenreinaasoriginal/ipBanned.txt", "a") as ff:
                     ff.write(ip)
 

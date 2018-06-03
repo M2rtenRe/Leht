@@ -1,10 +1,5 @@
 #!/usr/bin/python
-import hashlib,sys,getpass,base64,os,random,urllib.request,subprocess,socket,rngCam,time,cgi,sqlite3
-
-conn = sqlite3.connect('/home/m2rtenreinaasoriginal/Kasutajad.db')
-
-c = conn.cursor()
-c.execute("SELECT * FROM kasutajad")
+import hashlib,sys,getpass,base64,os,random,urllib.request,subprocess,socket,rngCam,time,cgi
 
 print("Content-type:text/html\r\n\r\n")
 
@@ -32,11 +27,9 @@ print('''<!DOCTYPE html>
     padding-right: 20px;
     border-radius: 8px;
     cursor: pointer;}
-
     .submit:hover {
     background-color: #409e5f;
     color: white;}
-
     .submit1{
       height: 40px;
       width: 40%;
@@ -49,7 +42,6 @@ print('''<!DOCTYPE html>
       padding-right: 20px;
       border-radius: 8px;
       cursor: pointer;}
-
     .submit1:hover {
       background-color: #409e5f;
       color: white;}
@@ -58,17 +50,21 @@ print('''<!DOCTYPE html>
 <body style="display:flex; padding: 0; width: 100%; overflow:hidden; align-items: center; justify-content: center; margin-top:10%; background-image:url(\'https://i.imgur.com/Tzs62qH.png\');">''')
 
 def createUser(newname,newpass):
-    for line in c.fetchall():
-        if cgi.escape(os.environ["HTTP_X_FORWARDED_FOR"]).strip() == line[3]:
-            return "Olemas"
+    with open("/home/m2rtenreinaasoriginal/ipBanned.txt", "r") as f:
+        for line in f.readlines():
+            if cgi.escape(os.environ["HTTP_X_FORWARDED_FOR"]).strip() == line.strip():
+                return "Banned"
+    f = open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r")
+    passListDecode = f.read()
+    passList = passListDecode.splitlines()
     if newname == None:
         return "Kasutajanimi"
     elif newpass == None:
         return "Parool"
-    c.execute("SELECT * FROM kasutajad")
-    for line in c.fetchall():
-        if newname.lower() == line[0].lower():
+    for line in passList:
+        if newname.lower() == line.split(":")[0].strip().lower():
             return "Kasutusel"
+    f = open("/home/m2rtenreinaasoriginal/kasutajad.txt", "a")
     saltPass = rngCam.captureCam(0)
     if saltPass == "No connection":
         return "Uhendus"
@@ -76,7 +72,8 @@ def createUser(newname,newpass):
     newPasss += saltPass
     newPasss += newpass
     newPassHash = hashlib.sha512(newPasss.strip().encode()).hexdigest()
-    c.execute("INSERT INTO kasutajad VALUES (?, ?, ?, ?, ?)", (newname, newPassHash, saltPass, cgi.escape(os.environ["HTTP_X_FORWARDED_FOR"]), "NO"))
+    f.write(newname+":"+newPassHash+"-"+saltPass+","+cgi.escape(os.environ["HTTP_X_FORWARDED_FOR"]).strip()+",0"+"\n")
+    f.close()
     return "Tehtud"
 
 form = cgi.FieldStorage()
@@ -88,8 +85,8 @@ if form.getvalue("Sisesta") != None:
     newName = form.getvalue("username")
     newPass = form.getvalue("password")
     newUserCheck = createUser(newName,newPass)
-    if newUserCheck == "Olemas":
-        print('<p style="font-family: \'Montserrat\', sans-serif; position: absolute; margin-top: -200px; color: #ffffff;">ERROR: Oled selle IP-ga juba kasutaja teinud!</p>')
+    if newUserCheck == "Banned":
+        print('<p style="font-family: \'Montserrat\', sans-serif; position: absolute; margin-top: -200px; color: #ffffff;">ERROR: IP on keelatud!</p>')
     if newUserCheck == "Uhendus":
         print('<p style="font-family: \'Montserrat\', sans-serif; position: absolute; margin-top: -200px; color: #ffffff;">ERROR: Ei suutnud serveriga uhendust luua!</p>')
     if newUserCheck == "Kasutajanimi":
@@ -111,6 +108,3 @@ print('''<h1 style="font-family: 'Krona One', sans-serif; font-size: 50px; color
 
 print('</body>')
 print('</html>')
-
-conn.commit()
-conn.close()
