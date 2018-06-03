@@ -99,7 +99,6 @@ if form.getvalue("Sisesta") != None:
         		var alias = \""""+userIn+"""\";
         		var timer;
         		var chatText;
-                var audio = new Audio('MSN.wav');
                 function banUser(command, user){
                     var xhttp = new XMLHttpRequest();
                     xhttp.open("POST", "banUser.py", true);
@@ -134,7 +133,6 @@ if form.getvalue("Sisesta") != None:
         		function setChatText(txt){
         			this.document.getElementById("chatBoxDiv").innerHTML = txt;
         			if(txt != chatText){
-                        audio.play();
                         updateScroll();
         			}
         			chatText = txt;
