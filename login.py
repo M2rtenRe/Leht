@@ -1,5 +1,9 @@
 #!/usr/bin/python
+<<<<<<< HEAD
 import hashlib,sys,getpass,base64,os,random,string,urllib.request,subprocess,socket,rngCam,time,cgi
+=======
+import io,uuid,hashlib,sys,getpass,base64,os,random,string,urllib.request,subprocess,socket,rngCam,time,cgi
+>>>>>>> b48f2d2f7963414ac8c9f3d1cae9603f8d1c6362
 
 loginCount = 0
 userCount = 0
@@ -46,7 +50,11 @@ print('''<!DOCTYPE html>
 
 def checkUser(passwordIn):
     global userIn
+<<<<<<< HEAD
     f = open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r")
+=======
+    f = io.open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r", encoding='utf-8')
+>>>>>>> b48f2d2f7963414ac8c9f3d1cae9603f8d1c6362
     passListDecode = f.read()
     passList = passListDecode.splitlines()
     if userIn == None:
@@ -60,7 +68,11 @@ def checkUser(passwordIn):
     f.close()
 
 def checkPass(passwordIn):
+<<<<<<< HEAD
     f = open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r")
+=======
+    f = io.open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r", encoding='utf-8')
+>>>>>>> b48f2d2f7963414ac8c9f3d1cae9603f8d1c6362
     passListDecode = f.read()
     passList = passListDecode.splitlines()
     if passwordIn == None:
@@ -77,6 +89,31 @@ def checkPass(passwordIn):
     return False
     f.close()
 
+def setGUID(user):
+    guid = "{"+str(uuid.uuid4())+"}"
+    f = io.open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r", encoding='utf-8')
+    lines = f.readlines()
+    f.close()
+
+    f = io.open("/home/m2rtenreinaasoriginal/kasutajad.txt", "w", encoding='utf-8')
+    for line in lines:
+        if line.split(":")[0] == user:
+            userLine = line
+    f.close()
+
+    with io.open("/home/m2rtenreinaasoriginal/kasutajad.txt", "w", encoding='utf-8') as f:
+        for line in lines:
+            if line == userLine:
+                curGUID = line.split(",")[2]
+                userLine = ""
+                finalWrite = userLine+line.replace(curGUID, guid, 1)+"\n"
+                f.write(finalWrite)
+            if line != userLine:
+                if line.split(":")[0] != user:
+                    f.write(line)
+    return guid
+
+
 form = cgi.FieldStorage()
 if form.getvalue("back") != None:
     print("<p>Tagasi minek...</p>")
@@ -89,6 +126,7 @@ if form.getvalue("Sisesta") != None:
     if userCheck == False:
         print('<p style="font-family: \'Montserrat\', sans-serif; position: absolute; margin-top: -200px; color: #ffffff;">ERROR: Vale kasutajanimi voi parool!</p>')
     if userCheck == True:
+        GUID = setGUID(userIn)
         print("""
         <head>
         	<link rel="stylesheet" type="text/css" href="style.css">
@@ -96,10 +134,14 @@ if form.getvalue("Sisesta") != None:
             <link href="https://fonts.googleapis.com/css?family=Arimo|Marmelad" rel="stylesheet">
             <script>
                 document.title = "Jututuba";
-        		var alias = \""""+userIn+"""\";
+        		var GUID = \""""+GUID+"""\";
         		var timer;
         		var chatText;
+<<<<<<< HEAD
                 var audio = new Audio('MSN.wav');
+=======
+
+>>>>>>> b48f2d2f7963414ac8c9f3d1cae9603f8d1c6362
                 function banUser(command, user){
                     var xhttp = new XMLHttpRequest();
                     xhttp.open("POST", "banUser.py", true);
@@ -128,13 +170,12 @@ if form.getvalue("Sisesta") != None:
         		function saveAlias(){
         			updateScroll();
         			this.document.getElementById("chatDiv").style.visibility = "visible";
-                    this.document.getElementById("aliasName").innerHTML = alias;
+                    this.document.getElementById("aliasName").innerHTML = \""""+userIn+"""\";
         			timer = setInterval(function(){ getChatText() }, 500);
         		}
         		function setChatText(txt){
         			this.document.getElementById("chatBoxDiv").innerHTML = txt;
         			if(txt != chatText){
-                        audio.play();
                         updateScroll();
         			}
         			chatText = txt;
@@ -148,13 +189,13 @@ if form.getvalue("Sisesta") != None:
         		    };
         		    xhttp.open("POST", "getChat.py", true);
         		    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        		    xhttp.send("alias="+alias);
+        		    xhttp.send("GUID="+GUID);
         		}
         		function addMessage(){
         			updateScroll();
         			var msg = this.document.getElementById("msg").value;
         			this.document.getElementById("msg").value = "";
-                    if (alias == "M2rtenRe"){
+                    if (\""""+userIn+"""\" == "M2rtenRe"){
                         if (msg.substring(0,5) == "/mute"){
                             mutedName = msg.substring(6);
                             muteUser("mute",mutedName);
@@ -178,14 +219,14 @@ if form.getvalue("Sisesta") != None:
                 		    var xhttp = new XMLHttpRequest();
                 		    xhttp.open(\"POST\", \"addMessage.py\", true);
                 		    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                		    xhttp.send("message="+alias+": "+msg);
+                		    xhttp.send("message="+GUID+": "+msg);
                         }
                     }
                     else{
                         var xhttp = new XMLHttpRequest();
                         xhttp.open(\"POST\", \"addMessage.py\", true);
                         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                        xhttp.send("message="+alias+": "+msg);
+                        xhttp.send("message="+GUID+": "+msg);
                     }
                 }
         		function updateScroll(){

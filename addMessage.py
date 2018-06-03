@@ -10,6 +10,17 @@ TAG_RE = re.compile(r'<[^>]+>')
 result = ""
 params = cgi.FieldStorage()
 message = params.getvalue("message")
+GUID = message.split(":")[0]
+
+with io.open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r", encoding='utf-8') as f:
+	lines = f.readlines()
+	for line in lines:
+		if line.split(",")[2] == GUID:
+			alias = line.split(":")[0]
+
+result += currentDate+'-'
+result += TAG_RE.sub('', alias)
+result += ":" + TAG_RE.sub('', message.split(":", 1)[1])
 
 print("Content-type: text/html; charset='UTF-8'\r\n\r\n")
 
@@ -30,9 +41,6 @@ with io.open("/home/m2rtenreinaasoriginal/ropud.txt", "r", encoding='utf-8') as 
                 sys.exit()
 
 with io.open("/home/m2rtenreinaasoriginal/chat.txt", "a", encoding='utf-8') as chatFile:
-    result += currentDate+'-'
-    result += TAG_RE.sub('', message.split(":")[0])
-    result += ":" + TAG_RE.sub('', message.split(":", 1)[1])
     chatFile.write(result+"\n")
 
 print(message)
