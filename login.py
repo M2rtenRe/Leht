@@ -1,10 +1,5 @@
 #!/usr/bin/python
-import hashlib,sys,getpass,base64,os,random,string,urllib.request,subprocess,socket,rngCam,time,cgi,sqlite3
-
-conn = sqlite3.connect('/home/m2rtenreinaasoriginal/Kasutajad.db')
-
-c = conn.cursor()
-c.execute("SELECT * FROM kasutajad")
+import hashlib,sys,getpass,base64,os,random,string,urllib.request,subprocess,socket,rngCam,time,cgi
 
 loginCount = 0
 userCount = 0
@@ -27,11 +22,9 @@ print('''<!DOCTYPE html>
   padding-right: 20px;
   border-radius: 8px;
   cursor: pointer;}
-
   .submit:hover {
   background-color: #409e5f;
   color: white;}
-
   .submit1{
     height: 40px;
     width: 40%;
@@ -44,7 +37,6 @@ print('''<!DOCTYPE html>
     padding-right: 20px;
     border-radius: 8px;
     cursor: pointer;}
-
   .submit1:hover {
     background-color: #409e5f;
     color: white;}
@@ -54,29 +46,34 @@ print('''<!DOCTYPE html>
 
 def checkUser(passwordIn):
     global userIn
+    f = open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r")
+    passListDecode = f.read()
+    passList = passListDecode.splitlines()
     if userIn == None:
         userIn = ''.join(random.choice(string.ascii_lowercase + string.ascii_uppercase + string.digits + string.punctuation) for n in range(10)).replace("-", "").replace(",","").replace(":","")
-    for line in c.fetchall():
-        if line[0].strip().lower() == userIn.strip().lower():
-            if line[4].strip() == "YES":
-                return "Banned"
-
-            userIn = line[0].strip()
+    for line in passList:
+        if line.split(":")[0].strip().lower() == userIn.lower():
+            userIn = line.split(":")[0].strip()
+            f.close()
             return checkPass(passwordIn)
     return False
     f.close()
 
 def checkPass(passwordIn):
+    f = open("/home/m2rtenreinaasoriginal/kasutajad.txt", "r")
+    passListDecode = f.read()
+    passList = passListDecode.splitlines()
     if passwordIn == None:
-        passwordIn = "aASDASfaSFAWRW232"
-    c.execute("SELECT * FROM kasutajad")
-    for line in c.fetchall():
+        passwordIn = "a"
+    for line in passList:
         pp = ""
-        pp += line[2].strip()
-        pp += passwordIn.strip()
+        pp += line.split("-")[1].split(",")[0].strip()
+        pp += passwordIn
         passInHash = hashlib.sha512(pp.strip().encode()).hexdigest()
-        if line[1].strip() == passInHash:
+        if line.split(":")[1].strip().split("-")[0].strip() == passInHash:
+            f.close()
             return True
+
     return False
     f.close()
 
@@ -89,8 +86,6 @@ if form.getvalue("Sisesta") != None:
     userIn = form.getvalue("username")
     passwordIn = form.getvalue("password")
     userCheck = checkUser(passwordIn)
-    if userCheck == "Banned":
-        print('<p style="font-family: \'Montserrat\', sans-serif; position: absolute; margin-top: -200px; color: #ffffff;">ERROR: Kasutaja on keelatud!</p>')
     if userCheck == False:
         print('<p style="font-family: \'Montserrat\', sans-serif; position: absolute; margin-top: -200px; color: #ffffff;">ERROR: Vale kasutajanimi voi parool!</p>')
     if userCheck == True:
@@ -105,28 +100,24 @@ if form.getvalue("Sisesta") != None:
         		var timer;
         		var chatText;
                 var audio = new Audio('MSN.wav');
-
                 function banUser(command, user){
                     var xhttp = new XMLHttpRequest();
                     xhttp.open("POST", "banUser.py", true);
         		    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         		    xhttp.send("alias="+user+"&command="+command);
                 }
-
                 function clearAll(){
                     var xhttp = new XMLHttpRequest();
                     xhttp.open("POST", "clearAll.py", true);
         		    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         		    xhttp.send(null);
                 }
-
                 function muteUser(command,mutedname){
                     var xhttp = new XMLHttpRequest();
                     xhttp.open("POST", "muteUser.py", true);
         		    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         		    xhttp.send("alias="+mutedName+"&command="+command);
                 }
-
                 function delMsg(deletedMsg){
                     var xhttp = new XMLHttpRequest();
                     deletedMsg = deletedMsg.innerHTML;
@@ -134,14 +125,12 @@ if form.getvalue("Sisesta") != None:
         		    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         		    xhttp.send("deletedMsg="+deletedMsg);
                 }
-
         		function saveAlias(){
         			updateScroll();
         			this.document.getElementById("chatDiv").style.visibility = "visible";
                     this.document.getElementById("aliasName").innerHTML = alias;
         			timer = setInterval(function(){ getChatText() }, 500);
         		}
-
         		function setChatText(txt){
         			this.document.getElementById("chatBoxDiv").innerHTML = txt;
         			if(txt != chatText){
@@ -150,7 +139,6 @@ if form.getvalue("Sisesta") != None:
         			}
         			chatText = txt;
         		}
-
         		function getChatText(){
         		    var xhttp = new XMLHttpRequest();
         		    xhttp.onreadystatechange = function() {
@@ -162,7 +150,6 @@ if form.getvalue("Sisesta") != None:
         		    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         		    xhttp.send("alias="+alias);
         		}
-
         		function addMessage(){
         			updateScroll();
         			var msg = this.document.getElementById("msg").value;
@@ -201,12 +188,10 @@ if form.getvalue("Sisesta") != None:
                         xhttp.send("message="+alias+": "+msg);
                     }
                 }
-
         		function updateScroll(){
         		    var element = document.getElementById("chatBoxDiv");
         		    element.scrollTop = element.scrollHeight;
         		}
-
                 function enterKeyPress(){
                     if (event.keyCode === 13) {
                         document.getElementById("send").click();}
@@ -240,5 +225,3 @@ print('''
 print("</form>")
 print('</body>')
 print('</html>')
-conn.commit()
-conn.close()
