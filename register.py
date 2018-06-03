@@ -72,11 +72,7 @@ def createUser(newname,newpass):
     newPasss += saltPass
     newPasss += newpass
     newPassHash = hashlib.sha512(newPasss.strip().encode()).hexdigest()
-<<<<<<< HEAD
     f.write(newname+":"+newPassHash+"-"+saltPass+","+cgi.escape(os.environ["HTTP_X_FORWARDED_FOR"]).strip()+"\n")
-=======
-    f.write(newname+":"+newPassHash+"-"+saltPass+","+cgi.escape(os.environ["HTTP_X_FORWARDED_FOR"]).strip()+",0"+"\n")
->>>>>>> b48f2d2f7963414ac8c9f3d1cae9603f8d1c6362
     f.close()
     return "Tehtud"
 
